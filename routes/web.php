@@ -67,10 +67,18 @@ Route::get('/categories/{category:slug}', function (Category $category) {
     ]);
 });
 
-Route::get('/authors/{user:username}', function (User $user) {
+// iini jalan nice
+// Route::get('/authors/{user:username}', function (User $user) {
+//     return view('posts',[
+//         'title' => 'user post',
+//         'posts' => $user->posts()
+//     ]);
+// });
+
+Route::get('/authors/{author:username}', function (User $author) {
     return view('posts',[
         'title' => 'user post',
-        'posts' => $user->posts()
+        'posts' => $author->posts()
     ]);
 });
 
