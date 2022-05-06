@@ -11,7 +11,8 @@ class PostController extends Controller
          
         return view('posts', [
             'title' => 'Posts',
-            'posts' => Post::all()
+            // 'posts' => Post::all()
+            'posts' => Post::latest()->get()
         ]);
     }
 
@@ -28,7 +29,13 @@ class PostController extends Controller
         //     'post' => Post::find($slug)
         // ]);
 
-
+        // ini udah jalan tapi mau ganti author
+        // return view('post', [
+        //     'title' => 'single post',
+        //     // 'post' => Post::find($slug)
+        //     'post' => Post::where('slug', $slug)->first()
+        //     // 'post' => Post::find(3)
+        // ]);
         return view('post', [
             'title' => 'single post',
             // 'post' => Post::find($slug)
