@@ -2,7 +2,19 @@
 {{-- dumb die @dd($posts) --}}
 
 @section('container')
-<h1>{{ $title }}</h1>
+
+<h1 class="mb-3 text-center">{{ $title }}</h1>
+<div class="row mb-3 justify-content-center">
+  <div class="col-md-6 ">
+    <form action="/posts">
+      <div class="input-group mb-3">
+        <input name="search" type="text" class="form-control" placeholder="Search ... " aria-label="Search ..." >
+        <button class="btn btn-danger" type="submit" >Search </button>
+      </div>
+    </form>
+  </div>
+</div>
+
 @if ($posts->count())
 <div class="card mb-3">
     <img src="https://source.unsplash.com/1200x400?{{ $posts[0]->category->name }}" class="card-img-top" alt="...">
@@ -19,10 +31,10 @@
       <a class="text-decoration-none btn btn-primary" href="/posts/{{ $posts[0]->slug }}">Read more </a>
     </div>
   </div>
-    
 @else
     <p class="text-center fs-4"> No Post</p>
 @endif
+
 <div class="container">
     <div class="row">
         @foreach ($posts->skip(1) as $post)
