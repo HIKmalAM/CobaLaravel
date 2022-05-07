@@ -11,8 +11,9 @@ class PostController extends Controller
          
         return view('posts', [
             'title' => 'All Posts',
+            'active' => 'posts',
             // 'posts' => Post::all()
-            'posts' => Post::with('author','category')->latest()->get()
+            'posts' => Post::latest()->get()
         ]);
     }
 
@@ -38,6 +39,7 @@ class PostController extends Controller
         // ]);
         return view('post', [
             'title' => 'single post',
+            'active' => 'posts',
             // 'post' => Post::find($slug)
             'post' => Post::where('slug', $slug)->first()
             // 'post' => Post::find(3)

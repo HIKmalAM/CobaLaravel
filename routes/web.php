@@ -19,19 +19,22 @@ use App\Models\User;
 
 Route::get('/', function () {
     return view('home', [
-        'title' => 'Home'
+        'title' => 'Home',
+        'active' => 'home'
     ]);
 });
 
 Route::get('/home', function () {
     return view('home', [
-        'title' => 'Home'
+        'title' => 'Home',
+        'active' => 'home'
     ]);
 });
 
 Route::get('/about', function () {
     return view('about',[
         'title' => 'About',
+        'active' => 'about',
         'name' => 'Endi Efendi',
         'email' => 'endi.efendi@gmail.com',
         'image' => 'efendi.png'
@@ -53,6 +56,7 @@ Route::get('/categories', function () {
     // echo Category::all();
     return view('categories',[
         'title' => 'list Categories',
+        'active' => 'categories',
         'categories' => Category::all()
     ]);
 });
@@ -67,6 +71,7 @@ Route::get('/categories/{category:slug}', function (Category $category) {
     // ]);
     return view('posts',[
         'title' => "Post By Category : $category->name",
+        'active' => 'categories',
         'posts' => $category->posts()->load('category','author')
     ]);
 });
@@ -82,6 +87,7 @@ Route::get('/categories/{category:slug}', function (Category $category) {
 Route::get('/authors/{author:username}', function (User $author) {
     return view('posts',[
         'title' => "Post By $author->name",
+        'active' => 'authors',
         'posts' => $author->posts()->load('category', 'author')
     ]);
 });
