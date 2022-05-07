@@ -60,10 +60,14 @@ Route::get('/categories', function () {
 Route::get('/categories/{category:slug}', function (Category $category) {
     // return view('category');
     // dd($category->posts());
-    return view('category',[
-        'title' => $category->name,
-        'posts' => $category->posts(),
-        'category' => $category->name
+    // return view('category',[
+    //     'title' => $category->name,
+    //     'posts' => $category->posts(),
+    //     'category' => $category->name
+    // ]);
+    return view('posts',[
+        'title' => "Post By Category : $category->name",
+        'posts' => $category->posts()
     ]);
 });
 
@@ -77,8 +81,8 @@ Route::get('/categories/{category:slug}', function (Category $category) {
 
 Route::get('/authors/{author:username}', function (User $author) {
     return view('posts',[
-        'title' => 'user post',
-        'posts' => $author->posts()
+        'title' => "Post By $author->name",
+        'posts' => $author->posts()->load('category', 'author')
     ]);
 });
 
