@@ -1,10 +1,12 @@
 <?php
 
-use App\Models\Post;
+// use App\Models\Post;
+use App\Models\User;
+use App\Models\Category;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostController;
-use App\Models\Category;
-use App\Models\User;
+use App\Http\Controllers\LoginController;
+use App\Http\Controllers\RegisterController;
 
 /*
 |--------------------------------------------------------------------------
@@ -42,15 +44,14 @@ Route::get('/about', function () {
 });
 
 
+Route::get('/register',[RegisterController::class, 'index']);
+Route::post('/register',[RegisterController::class, 'store']);
+
+
+Route::get('/login',[LoginController::class, 'index']);
 
 Route::get('/posts',[PostController::class, 'index']);
 Route::get('/posts/{post:slug}', [PostController::class,'show']);
-
-
-
-
-
-
 
 Route::get('/categories', function () {
     // echo Category::all();
@@ -93,6 +94,22 @@ Route::get('/categories', function () {
 // });
 
 
+// Route::get('/author/{author:username}', function (User $author) {
+// //     echo 'a';
+//     $validatedData= array(
+//         'name' => 'namamasuk',
+//         'username' => 'usernamamasuk',
+//         'email' => 'admin@gmail.com',
+//         'password' => 'masuk'
+//     );
+// User::created($validatedData);
+
+//     return view('categories',[
+//         'title' => 'list Categories',
+//         'active' => 'categories',
+//         'categories' => Category::all()
+//     ]);
+// });
 
 
 
