@@ -6,19 +6,49 @@
 </div>
 <div class="col-lg-8">
   
-<form method="POST" action="/dashborad/posts">
+<form method="POST" action="/dashboard/posts/">
+  @csrf
   <div class="mb-3">
     <label for="title" class="form-label">Title</label>
     <input type="text" class="form-control" id="title" name="title">
   </div>
   <div class="mb-3">
     <label for="slug" class="form-label">slug</label>
-    <input type="text" class="form-control" id="slug" name="slug">
+    {{-- <input type="text" class="form-control" id="slug" name="slug" disabled readonly> --}}
+    <input type="text" class="form-control" id="slug" name="slug" >
+  </div>
+  <div class="mb-3">
+    <label for="category" class="form-label">category</label>
+    <select class="form-select" name="category_id">
+      @foreach ($categories as $category)
+      <option value="{{ $category->id }}">{{ $category->name }}</option>
+      @endforeach
+    </select>
+  </div>
+  <div class="mb-3">
+    <label for="body" class="form-label">body</label>
+    <input id="body" type="hidden" name="content">
+  <trix-editor input="body"></trix-editor>
   </div>
   <button type="submit" class="btn btn-primary">Create Post </button>
 </form>
 </div>
-    
+    <script>
+      const title = document.querySelector('#title');
+      const slug = document.querySelector('#slug');
+
+      title.addEventListener('change', function(){
+        
+        fetch('/dashboard/posts/checkSlug?title='+ title.value)
+          .then(response => response.json())
+          .then(data => slug.value = data.slug)
+      });
+
+      
+      document.addEventListener('trix-file-accept', function(e){
+        e.preventDefault();
+      })
+    </script>
 @endsection
 
 

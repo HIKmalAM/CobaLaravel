@@ -5,26 +5,18 @@ namespace App\Models;
 use App\Models\Category;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Cviebrock\EloquentSluggable\Sluggable;
 
 class Post extends Model
 {
-    use HasFactory;
+    use HasFactory,  Sluggable;
 
     // protected $fillable = ['title','excerpt','body'];
     protected $guarded = ['id'];
     protected $with = ['author','category'];
     
     public function scopeFilter($query, array $filters){
-        // if (request('search')){
-        //     $query->where('title', 'like', '%'. request('search') .'%')
-        //         ->orWhere('body', 'like', '%'. request('search') .'%');
-        // }
-
-        // if(isset($filters['search']) ? $filters['search'] : false ){
-        //         $query->where('title', 'like', '%'. $filters['search'] .'%')
-        //             ->orWhere('body', 'like', '%'. $filters['search'] .'%');
-        // }
-            // dd($query);
+        
         $query->when($filters['search'] ?? false, function ($query, $search) {
             $query->where('title', 'like', '%'. $search .'%')
                 ->orWhere('body', 'like', '%'. $search .'%');
@@ -54,5 +46,14 @@ class Post extends Model
     public function getRouteKeyName()
     {
         return 'slug';
+    }
+    
+    public function sluggable(): array
+    {
+        return [
+            'slug' => [
+                'source' => 'title'
+            ]
+        ];
     }
 }
