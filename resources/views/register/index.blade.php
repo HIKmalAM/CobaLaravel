@@ -10,7 +10,7 @@
         <h1 class="h3 mb-3 fw-normal text-center">Please Rgister</h1>
     
         <div class="form-floating">
-          <input type="text" value="{{ old('name') }}" class="form-control rounded-top @error('name') is-invalid @enderror" id="nameInput" placeholder="name" name="name">
+          <input type="text" value="{{ old('name') }}" class="form-control rounded-top @error('name') is-invalid @enderror" id="nameInput" placeholder="name" name="name" autofocus required>
           <label for="floatingInput">Name</label>
           @error('name')
           <div class="invalid-feedback">
@@ -20,7 +20,7 @@
         </div>
     
         <div class="form-floating">
-          <input type="text" value="{{ old('username') }}" class="form-control  @error('username') is-invalid @enderror" id="usernameInput" placeholder="username" name="username">
+          <input type="text" value="{{ old('username') }}" class="form-control  @error('username') is-invalid @enderror" id="usernameInput" placeholder="username" name="username" required>
           <label for="floatingInput">Username</label>
           @error('username')
           <div class="invalid-feedback">
@@ -30,7 +30,7 @@
         </div>
     
         <div class="form-floating">
-          <input type="email" value="{{ old('email') }}" class="form-control  @error('email') is-invalid @enderror" id="emailInput" placeholder="name@example.com" name="email">
+          <input type="email" value="{{ old('email') }}" class="form-control  @error('email') is-invalid @enderror" id="emailInput" placeholder="name@example.com" name="email" required>
           <label for="floatingInput">Email address</label>
           @error('email')
           <div class="invalid-feedback">
@@ -40,7 +40,7 @@
         </div>
 
         <div class="form-floating ">
-          <input type="password" class="form-control rounded-bottom  @error('password') is-invalid @enderror" id="floatingPassword" placeholder="Password" name="password">
+          <input type="password" class="form-control rounded-bottom  @error('password') is-invalid @enderror" id="floatingPassword" placeholder="Password" name="password" required>
           <label for="floatingPassword">Password</label>
           @error('password')
           <div class="invalid-feedback">
